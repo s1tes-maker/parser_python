@@ -7,4 +7,13 @@ jobs:
   deployment:
     name: deployment
     runs-on: ubuntu-latest
+    steps:
+      - name: Executing remote command
+        uses: appleboy/ssh-action@master
+        with:
+          HOST: ${{ secrets.SSH_HOST }}
+          USERNAME: ${{ secrets.SSH_USER }}
+          PASSWORD: ${{ secrets.SSH_PASSWORD }}
+          PORT: ${{ secrets.SSH_PORT }}
+          script: cd ..
 
