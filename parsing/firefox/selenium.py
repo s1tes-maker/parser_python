@@ -38,3 +38,4 @@ class MyFirefox:
         )
 
         return self.driver
+
