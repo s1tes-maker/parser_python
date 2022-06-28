@@ -27,5 +27,5 @@ jobs:
           PORT: ${{ secrets.SSH_PORT }}
         with:
           source: "."
-          target: "/var/www/test"    
+          target: "/root/AvitoBot2"    
 
