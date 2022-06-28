@@ -15,5 +15,5 @@ jobs:
           USERNAME: ${{ secrets.SSH_USER }}
           PASSWORD: ${{ secrets.SSH_PASSWORD }}
           PORT: ${{ secrets.SSH_PORT }}
-          script: cd ..
+          script: cd AvitoBot1
 
