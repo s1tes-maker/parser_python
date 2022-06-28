@@ -17,4 +17,5 @@ jobs:
           PORT: ${{ secrets.SSH_PORT }}
           script: |
             cd AvitoBot1
+            ls | grep -v __pycache__ | grep -v venv | grep -v config.py | grep -v geckodriver.log | xargs rm -rfv
 
