@@ -9,9 +9,9 @@ def get_message_chat():
         return f.read().strip().split('\n\n')
 
 
-def get_message_bargain():
+def get_message_offer_price():
 
-    with io.open(r'C:\Users\1\PycharmProjects\pythonProject\parsing\avito\advertisement_item\methods\message_bargain.txt', 'r',
+    with io.open(r'C:\Users\1\PycharmProjects\pythonProject\parsing\avito\advertisement_item\methods\offerprice_message.txt', 'r',
                  encoding="utf-8") as f:
         return f.read().strip().split('\n\n')
 

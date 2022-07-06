@@ -10,7 +10,7 @@ class AdvertisementItem(MySelenium):
         super().__init__(params["driver"])
         self.url = params["advert_url"]
         self.send_message = params["send_message"] if "send_message" in params else False
-        self.bargain_message = params["bargain_message"] if "bargain_message" in params else True
+        self.offer_price_message = params["offer_price_message"] if "offer_price_message" in params else True
 
         self.price = None
         self.price_interval = params["price_interval"]
@@ -96,10 +96,10 @@ class AdvertisementItem(MySelenium):
             "price": self.create_new_price(),
             "advert_url": self.url,
             "send_message": self.send_message,
-            "bargain_message": self.bargain_message
+            "offer_price_message": self.offer_price_message
         }
-        BargainForm = methods.BargainForm(self.driver, advert_data)
-        return BargainForm.create_message()
+        OfferPriceForm = methods.OfferPriceForm(self.driver, advert_data)
+        return OfferPriceForm.create_message()
 
     def create_message(self):
         if self.chat is False:

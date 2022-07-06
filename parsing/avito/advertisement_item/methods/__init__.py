@@ -1,2 +1,2 @@
-from .bargain_form import BargainForm
+from .offerprice_form import OfferPriceForm
 from .chat_form import ChatForm

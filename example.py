@@ -1,48 +1,23 @@
-import warnings
 import time
-
 from parsing import avito, firefox
 from methods.getConfigs import *
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 
-configs = get_configs()
-
-advert_id = 1
-msg_text = "text"
-advert_url = "url"
-
-# exit("test")
+f = open('example.txt', 'w')
+f.close()
+exit('dd')
 # пример обычного подключения
 # url = "https://yandex.ru/internet"
-
 # пример подключения Авито
-# url = "https://www.avito.ru/moskva/kvartiry"
-# url = "https://m.avito.ru/moskva/kvartiry/prodam-ASgBAgICAUSSA8YQ?context=H4sIAAAAAAAAA0u0MrSqLraysFJKK8rPDUhMT1WyBnOLM_KLSpJLS5SsawGw9bv_JAAAAA&radius=0&presentationType=serp"
-# предложить свою цену
-# url = "https://m.avito.ru/moskva/kvartiry/kvartira-studiya_17m_117et._2356702117?context=H4sIAAAAAAAA_0q0MrSqLrYytFKqULIutjI2tFKqNDUoLC5IzEpNLizKLSkxzi3NscgwTMo2NDNLyTPOUbKuBQQAAP__YwbUVzUAAAA"
+# url = "https://m.avito.ru/moskva_i_mo/telefony?f=ASgCAgECAUXGmgwUeyJmcm9tIjoyMDAwLCJ0byI6MH0&geoCoords=55.755814%2C37.617635&radius=0&s=104&user=1&presentationType=serp"
 
-#url = "https://m.avito.ru/moskva_i_mo/telefony?f=ASgCAgECAUXGmgwUeyJmcm9tIjoyMDAwLCJ0byI6MH0&geoCoords=55.755814%2C37.617635&radius=0&s=104&user=1&presentationType=serp"
-
-# driver = avito.driver
-
+configs = get_configs()
 profiles = ["xd474gbq.AvitoAB"]
 
 Firefox = firefox.MyFirefox(profiles[0])
 AvitoSelenium = avito.AvitoSelenium(Firefox)
 driver = AvitoSelenium.driver
-
-# driver.get(url)
-
-# driver.quit()
-
-# Firefox = firefox.MyFirefox(profiles[0])
-# driver = Firefox.driver
-# AvitoSelenium = avito.AvitoSelenium(Firefox)
-# driver = AvitoSelenium.driver
-# driver.get(url)
-warnings.filterwarnings("ignore", category=DeprecationWarning)
-
 
 try:
 
@@ -73,10 +48,10 @@ try:
             AdvertisementItem = avito.advertisement_item.AdvertisementItem({
                 "driver": driver,
                 "advert_url": advert_url,
-                "bargain_message": False,
+                "offer_price_message": False,
                 "send_message": False,
                 "chat": False,
-                "price_interval": (41, 45)
+                "price_interval": (configs["discount_min"], configs["discount_max"])
             })
 
             suggest_price = AdvertisementItem.suggest_price()
@@ -90,7 +65,7 @@ try:
             driver.close()
             driver.switch_to.window(original_window)
 
-            if i > ADVERT_AMOUNT - 1:
+            if i > configs["count"] - 1:
                 break
 
             last_link = link
