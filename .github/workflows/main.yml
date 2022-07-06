@@ -29,4 +29,5 @@ jobs:
         with:
           source: "."
           target: "/var/www/cgi-bin/AvitoBot1"
+          rm: true
 
