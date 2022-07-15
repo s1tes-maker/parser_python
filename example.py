@@ -3,16 +3,19 @@ from parsing import avito, firefox
 from methods.getConfigs import *
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
+from sys import argv
 
-f = open('example.txt', 'w')
-f.close()
-exit('dd')
 # пример обычного подключения
 # url = "https://yandex.ru/internet"
 # пример подключения Авито
 # url = "https://m.avito.ru/moskva_i_mo/telefony?f=ASgCAgECAUXGmgwUeyJmcm9tIjoyMDAwLCJ0byI6MH0&geoCoords=55.755814%2C37.617635&radius=0&s=104&user=1&presentationType=serp"
-
+process_id = argv
+exit(process_id)
 configs = get_configs()
+
+if configs["offer_price"]["active"] != 1:
+    exit("Программа успешно выполнена. Обработано объявлений 0")
+
 profiles = ["xd474gbq.AvitoAB"]
 
 Firefox = firefox.MyFirefox(profiles[0])

@@ -13,7 +13,7 @@ def get_configs():
                     "avito_data->>'$.suggest_price_message' AS suggest_price_message, " \
                     "avito_data->>'$.discount_min' AS discount_min, " \
                     "avito_data->>'$.discount_max' AS discount_max " \
-                    "FROM `configs` WHERE processing is NULL ORDER BY id DESC"
+                    "FROM `configs` WHERE status='transfer_control_to_parser' ORDER BY id DESC"
             cursor.execute(query)
             data = cursor.fetchone()
 
