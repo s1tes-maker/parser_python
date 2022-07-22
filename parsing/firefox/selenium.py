@@ -1,5 +1,5 @@
 from selenium.webdriver.firefox.service import Service as FirefoxService
-from config import PATH_TO_GECKODRIVER, PATH_TO_FIREFOX, PATH_TO_PROFILES
+from config import PATH_TO_GECKODRIVER, PATH_TO_FIREFOX, PATH_TO_PROFILES, HEADLESS
 from selenium import webdriver
 
 
@@ -14,7 +14,6 @@ class MyFirefox:
         }
 
         self.profile = profile
-        self.driver = self.create_driver()
 
     def create_driver(self, user_agent=False):
 
@@ -30,6 +29,7 @@ class MyFirefox:
             profile.set_preference("general.useragent.override", user_agent)
 
         options.profile = PATH_TO_PROFILES + self.profile
+        options.headless = HEADLESS
         options.binary_location = self.connection_params["browser_location"]
 
         self.driver = webdriver.Firefox(

@@ -1,36 +1,32 @@
 import time
-from parsing import avito, firefox
+from parsing.avito.selenium import *
+from parsing.avito.advertisments_list import *
 from methods.getConfigs import *
+from methods.sendReply import *
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
-from sys import argv
 
-# пример обычного подключения
-# url = "https://yandex.ru/internet"
 # пример подключения Авито
 # url = "https://m.avito.ru/moskva_i_mo/telefony?f=ASgCAgECAUXGmgwUeyJmcm9tIjoyMDAwLCJ0byI6MH0&geoCoords=55.755814%2C37.617635&radius=0&s=104&user=1&presentationType=serp"
-process_id = argv
-exit(process_id)
+
 configs = get_configs()
 
 if configs["offer_price"]["active"] != 1:
-    exit("Программа успешно выполнена. Обработано объявлений 0")
+    send_reply("successful", "Программа успешно выполнена. Обработано объявлений 0")
+    exit(0)
+send_reply("python_start", "в процессе...")
 
-profiles = ["xd474gbq.AvitoAB"]
-
-Firefox = firefox.MyFirefox(profiles[0])
-AvitoSelenium = avito.AvitoSelenium(Firefox)
-driver = AvitoSelenium.driver
+driver = create_driver("xd474gbq.AvitoAB")
 
 try:
-
-    AdvertisementsList = avito.advertisments_list.AdvertisementsList(driver, configs["url"])
-    AdvertisementsList.open_link()
+    AdvList = AdvertisementsList(driver, configs["url"])
+    AdvList.open_link()
 
     i = 0
     last_link = False
     while i < configs["count"]:
-        links = AdvertisementsList.get_items_links()
+
+        links = AdvList.get_items_links()
         flag: str = "continue"
 
         print(i)
@@ -87,4 +83,4 @@ try:
     time.sleep(5)
 
 except Exception as ex:
-    print(ex)
+    send_reply("error", "script error 0000001", str(ex.args[0]))

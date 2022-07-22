@@ -1,4 +1,4 @@
-from .main import AdvertisementsList
+from .main import *
 
 
 
